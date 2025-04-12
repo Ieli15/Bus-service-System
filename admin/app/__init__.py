@@ -1,11 +1,12 @@
 # app/__init__.py
 from flask import Flask
 from .config import Config
-from .extensions import db
+from .extensions import db , ma
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
+
 
 db = SQLAlchemy()
 ma = Marshmallow() 
@@ -23,11 +24,18 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/auth')
     
     from .routes.admin import admin_bp
-    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(admin_bp, url_prefix='/admin/')
     
     from app.routes.route_routes import bp as route_bp
     app.register_blueprint(route_bp)
-
     
+    from app.routes.schedule_routes import schedule_bp
+    app.register_blueprint(schedule_bp, url_prefix="/admin/schedules")
+    
+    @app.route("/")
+    def index():
+        return {"message": "Backend is running 🚍"}, 200
+
+
 
     return app
