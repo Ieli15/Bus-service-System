@@ -3,3 +3,5 @@ flask-sqlalchemy
 flask-migrate
 flask-jwt-extended
 python-dotenv
+marshmallow
+flask-marshmallow
