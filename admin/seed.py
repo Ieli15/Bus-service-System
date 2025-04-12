@@ -1,4 +1,4 @@
-from app import create_app
+from app import create_app , db
 from app.extensions import db
 from app.models.user import User
 from app.models.bus import Bus
